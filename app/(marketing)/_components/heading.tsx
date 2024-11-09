@@ -2,7 +2,7 @@
 
 import { Spinner } from "@/components/spinner";
 import { Button } from "@/components/ui/button";
-import { SignInButton } from "@clerk/clerk-react";
+import { SignUpButton } from "@clerk/clerk-react";
 import { useConvexAuth } from "convex/react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -32,12 +32,12 @@ export const Heading = () => {
         </Button>
       )}
       {!isAuthenticated && !isLoading && (
-        <SignInButton>
+        <SignUpButton>
           <Button>
             Get Celestia free
             <ArrowRight></ArrowRight>
           </Button>
-        </SignInButton>
+        </SignUpButton>
       )}
     </div>
   );

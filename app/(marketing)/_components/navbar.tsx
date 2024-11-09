@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 
 import { useConvexAuth } from "convex/react";
-import { SignInButton, UserButton } from "@clerk/clerk-react";
+import { SignInButton, UserButton, SignUpButton } from "@clerk/clerk-react";
 import Link from "next/link";
 
 import { Spinner } from "@/components/spinner";
@@ -34,11 +34,11 @@ export const Navbar = () => {
                 Log in
               </Button>
             </SignInButton>
-            <SignInButton mode="modal">
+            <SignUpButton mode="modal">
               <Button variant={'default'} size={'sm'}>
                 Get Celestia free
               </Button>
-            </SignInButton>
+            </SignUpButton>
           </>
         )}
         {isAuthenticated && !isLoading && (
