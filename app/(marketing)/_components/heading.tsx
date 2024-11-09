@@ -1,9 +1,15 @@
 "use client"
 
+import { Spinner } from "@/components/spinner";
 import { Button } from "@/components/ui/button";
+import { SignInButton } from "@clerk/clerk-react";
+import { useConvexAuth } from "convex/react";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export const Heading = () => {
+  const { isAuthenticated, isLoading } = useConvexAuth();
+
   return (
     <div className="max-w-3xl space-y-4">
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
@@ -12,10 +18,27 @@ export const Heading = () => {
       <h3 className="text-base sm:text-xl md:text-2xl font-medium px-20">
         Celestial: The Unified Space Where Ideas Flow and Productivity Grows.
       </h3>
-      <Button>
-        Enter Celestia
-        <ArrowRight></ArrowRight>
-      </Button>
+      {isLoading && (
+        <div className="w-full flex items-center justify-center">
+          <Spinner size={'lg'}/>
+        </div>
+      )}
+      {isAuthenticated && !isLoading && (
+        <Button asChild>
+          <Link href={"/documents"} >
+            Enter Celestia
+            <ArrowRight></ArrowRight>
+          </Link>
+        </Button>
+      )}
+      {!isAuthenticated && !isLoading && (
+        <SignInButton>
+          <Button>
+            Get Celestia free
+            <ArrowRight></ArrowRight>
+          </Button>
+        </SignInButton>
+      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { url } from "inspector";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ConvexClientProvider } from "@/components/providers/convex-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -42,15 +43,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          storageKey="celestia-theme-2"
-        >
-        {children}
-        </ThemeProvider>
+        <ConvexClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            storageKey="celestia-theme-2"
+          >
+          {children}
+          </ThemeProvider>
+        </ConvexClientProvider>
       </body>
     </html>
   );
