@@ -1,3 +1,4 @@
+import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -51,6 +52,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="celestia-theme-2"
           >
+            <Toaster position="bottom-center" />
           {children}
           </ThemeProvider>
         </ConvexClientProvider>
