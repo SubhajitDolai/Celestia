@@ -1,10 +1,13 @@
 import { Toaster } from "sonner";
-import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
-import { url } from "inspector";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import type { Metadata } from "next";
+
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ModalProvider } from "@/components/providers/modal-provider";
+
+import "./globals.css";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -45,16 +48,20 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ConvexClientProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="celestia-theme-2"
-          >
-            <Toaster position="bottom-center" />
-          {children}
-          </ThemeProvider>
+          <EdgeStoreProvider>
+
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="celestia-theme-2"
+            >
+              <Toaster position="bottom-center" />
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
       </body>
     </html>
